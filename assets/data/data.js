@@ -97,9 +97,9 @@ const products = [
         name: 'Edamame',
         description: 'Cocinadas al vapor, sazonadas con sal kosher.',
         price: 4.75,
-        category: "entrada"
+        category: "entradas"
     },
-    {
+    {// errata "entrada"
         id: 14,
         name: 'Hakodate Ramen',
         description: 'Sopa ramen a base de sal. Las con fideos finos, rectos y sopa clara. Lleva verduras aromatizadas, algas, bonito y pollo.',
