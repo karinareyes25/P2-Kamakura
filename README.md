@@ -12,12 +12,12 @@ Estado: En proceso
 - Grigory Vladimiro - Developer
 
 
-Objetivo:
-Desarrollar la lógica de la página utilizando Javascript.
+## Objetivo:
+- Desarrollar la lógica de la página utilizando Javascript.
 
-Tecnologías y herramientas utilizadas:
-Github
-Git
-Visual Studio Code:
-Lenguajes: HTML5, CSS3 y JavaScrpt
-Trello: para definir y asignar roles - https://trello.com/b/KqL7iZSs/kamakura-food
+## Tecnologías y herramientas utilizadas:
+- Github
+- Git
+- Visual Studio Code:
+- Lenguajes: HTML5, CSS3 y JavaScrpt
+- Trello: para definir y asignar roles - https://trello.com/b/KqL7iZSs/kamakura-food
