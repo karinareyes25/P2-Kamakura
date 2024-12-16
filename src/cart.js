@@ -1,39 +1,13 @@
-//DEBE contener las funcionalidades del carrito de compras.
-import { products } from '../assets/data/data.js';
-const toggleButton = document.getElementById('cart');
-
-function toggleCart() {
-    const cartContainer = document.getElementById('cart-container');
-    cartContainer.style.display = cartContainer.style.display === 'flex' ? 'none' : 'flex';
-    const cartProductsContainer = document.getElementById('cart-products');
-    const cartTotal = document.getElementById('cart-total');
-
-    // Limpiar el contenido del carrito
-    cartProductsContainer.innerHTML = '';
-
-    if (cart.length === 0) {
-        cartProductsContainer.innerHTML = '<h3>Añade un plato a tu menú</h3>';
-        cartTotal.textContent = 'Total: 0 €';
-        return;
-    }
-    
-}
-// Evento para mostrar/ocultar el carrito
-toggleButton.addEventListener('click', toggleCart);
-
-/*
- * Función para añadir un producto al carrito.
- * @param {number} productId - El ID del producto a añadir.
- */
+// Variables globales
+import {products } from '../assets/data/data.js';
 let cart = []; // Array para almacenar los productos en el carrito
+const toggleButton = document.getElementById('cart');
+const cartProductsContainer = document.getElementById('cart-products');
+const cartTotal = document.getElementById('cart-total');
+const productsContainer = document.getElementById('products');
 
-/**
- * Función para renderizar el carrito en el DOM.
- */
+// Función para renderizar el carrito en el DOM
 function renderCart() {
-    const cartProductsContainer = document.getElementById('cart-products');
-    const cartTotal = document.getElementById('cart-total');
-
     // Limpiar el contenido del carrito
     cartProductsContainer.innerHTML = '';
 
@@ -45,6 +19,7 @@ function renderCart() {
 
     let total = 0;
 
+    // Iterar sobre los productos en el carrito y mostrarlos
     cart.forEach(item => {
         total += item.price * item.quantity;
 
@@ -65,14 +40,21 @@ function renderCart() {
                 <button class="cart-remove" data-id="${item.id}">-</button>
             </div>
         `;
-
         cartProductsContainer.appendChild(cartItem);
     });
 
+    // Actualizar el total del carrito
     cartTotal.textContent = `Total: ${total.toFixed(2)} €`;
 }
 
+// Función para alternar la visibilidad del carrito
+function toggleCart() {
+    const cartContainer = document.getElementById('cart-container');
+    cartContainer.style.display = cartContainer.style.display === 'flex' ? 'none' : 'flex';
+    renderCart();  // Asegúrate de renderizar el carrito cada vez que se muestre/oculte
+}
 
+// Función para añadir un producto al carrito
 function addToCart(productId) {
     const product = products.find(p => p.id === parseInt(productId));
     if (!product) return;
@@ -87,15 +69,13 @@ function addToCart(productId) {
     renderCart();
 }
 
-/*
- * Función para eliminar completamente un producto del carrito.
- * @param {number} productId - El ID del producto a eliminar.
- */
+// Función para eliminar completamente un producto del carrito
 function deleteFromCart(productId) {
     cart = cart.filter(item => item.id !== parseInt(productId));
     renderCart();
 }
 
+// Función para reducir la cantidad de un producto en el carrito
 function removeFromCart(productId) {
     const cartItemIndex = cart.findIndex(item => item.id === parseInt(productId));
     if (cartItemIndex !== -1) {
@@ -109,17 +89,18 @@ function removeFromCart(productId) {
     renderCart();
 }
 
- // Evento para añadir productos desde la lista de productos
- const productsContainer = document.getElementById('products');
- productsContainer.addEventListener('click', (e) => {
+// Asignar evento para mostrar/ocultar el carrito
+toggleButton.addEventListener('click', toggleCart);
+
+// Asignar evento para añadir productos desde la lista de productos
+productsContainer.addEventListener('click', (e) => {
     if (e.target.classList.contains('add-button')) {
         const productId = e.target.getAttribute('data-id');
         addToCart(productId);
     }
 });
 
-// Eventos para modificar productos directamente en el carrito
-const cartProductsContainer = document.getElementById('cart-products');
+// Asignar eventos para modificar productos directamente en el carrito
 cartProductsContainer.addEventListener('click', (e) => {
     const productId = e.target.getAttribute('data-id');
     if (e.target.classList.contains('cart-add')) {
@@ -130,4 +111,3 @@ cartProductsContainer.addEventListener('click', (e) => {
         deleteFromCart(productId);
     }
 });
-
