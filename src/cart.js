@@ -5,6 +5,18 @@ const toggleButton = document.getElementById('cart');
 function toggleCart() {
     const cartContainer = document.getElementById('cart-container');
     cartContainer.style.display = cartContainer.style.display === 'flex' ? 'none' : 'flex';
+    const cartProductsContainer = document.getElementById('cart-products');
+    const cartTotal = document.getElementById('cart-total');
+
+    // Limpiar el contenido del carrito
+    cartProductsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+        cartProductsContainer.innerHTML = '<h3>Añade un plato a tu menú</h3>';
+        cartTotal.textContent = 'Total: 0 €';
+        return;
+    }
+    
 }
 // Evento para mostrar/ocultar el carrito
 toggleButton.addEventListener('click', toggleCart);
