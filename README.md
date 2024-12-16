@@ -6,7 +6,7 @@ Estado: En proceso
 ## Integrantes:
 
 - Jesús Enjamio - Product Owner
-- Alejandra Fernándeza - Time Keeper
+- Alejandra Fernández - Time Keeper
 - Juan Esteban Castro - Developer
 - Karina Lorenzo - Developer
 - Grigory Vladimiro - Developer
