@@ -7,7 +7,7 @@ const cartTotal = document.getElementById('cart-total');
 const productsContainer = document.getElementById('products');
 
 // Función para renderizar el carrito en el DOM
-function renderCart() {
+function loadCart() {
     // Limpiar el contenido del carrito
     cartProductsContainer.innerHTML = '';
 
@@ -51,7 +51,7 @@ function renderCart() {
 function toggleCart() {
     const cartContainer = document.getElementById('cart-container');
     cartContainer.style.display = cartContainer.style.display === 'flex' ? 'none' : 'flex';
-    renderCart();  // Asegúrate de renderizar el carrito cada vez que se muestre/oculte
+    loadCart();  // Asegúrate de renderizar el carrito cada vez que se muestre/oculte
 }
 
 // Función para añadir un producto al carrito
@@ -66,13 +66,13 @@ function addToCart(productId) {
         cart.push({ ...product, quantity: 1 });
     }
 
-    renderCart();
+    loadCart();
 }
 
 // Función para eliminar completamente un producto del carrito
 function deleteFromCart(productId) {
     cart = cart.filter(item => item.id !== parseInt(productId));
-    renderCart();
+    loadCart();
 }
 
 // Función para reducir la cantidad de un producto en el carrito
@@ -86,7 +86,7 @@ function removeFromCart(productId) {
         }
     }
 
-    renderCart();
+    loadCart();
 }
 
 // Asignar evento para mostrar/ocultar el carrito
