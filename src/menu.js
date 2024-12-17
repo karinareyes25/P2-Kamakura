@@ -1,6 +1,5 @@
 //DEBE imprimir en pantalla la información de filtros.
 import {filters, products} from '../assets/data/data.js';
-import { load } from './searcher.js';
 function loadFilters() {
     const filtersContainer = document.getElementById('filters'); // Contenedor de los filtros
 
@@ -51,4 +50,4 @@ function loadMenu() {
 
 
 // Llamar a la función para renderizar los filtros renderFilters();
-loadMenu(); loadFilters(); load();
+loadMenu(); loadFilters(); 

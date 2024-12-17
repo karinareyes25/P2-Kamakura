@@ -46,7 +46,7 @@ function loadFilterProducts(category) {
 
 
 // Esta función se encarga de renderizar los filtros en el HTML
-export function load() {
+function load() {
     const filtersContainer = document.getElementById('filters'); // Contenedor de los filtros
 
     // Limpiar el contenedor por si ya tiene contenido
@@ -68,5 +68,5 @@ export function load() {
         filtersContainer.appendChild(filterButton);
     });
 }
-
+load();
 
