@@ -112,8 +112,5 @@ cartProductsContainer.addEventListener('click', (e) => {
     }
 });
 
-<<<<<<< HEAD
-export {cart};
-=======
 
->>>>>>> 1493a09ed0a018ad857e90811d3c2327ced7c8d4
+export {cart};
