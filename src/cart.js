@@ -111,3 +111,5 @@ cartProductsContainer.addEventListener('click', (e) => {
         deleteFromCart(productId);
     }
 });
+
+export{cart};
