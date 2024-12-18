@@ -1,6 +1,4 @@
-//Aquí intenta poner las funcionalidades del recibo
-// Aquí intentamos poner las funcionalidades del recibo
-// Importamos el carrito
+// Importamos el carrito desde cart.js
 import { cart } from './cart.js';
 
 // Función para calcular los detalles del recibo
@@ -19,18 +17,12 @@ function calculateReceiptDetails() {
     return { receiptDetails, total: total.toFixed(2) };
 }
 
-// Función para mostrar el recibo
+// Función para mostrar el recibo dentro del contenedor del carrito
 function renderReceipt() {
-    const cartContainer = document.getElementById('cart-container');
-    const cartContent = document.getElementById('cart-products');
+    const productsContainer = document.getElementById('products-container');
     const receiptContainer = document.getElementById('receipt-container');
     const receiptProductContainer = document.getElementById('receipt-product');
     const receiptTotal = document.getElementById('receipt-total');
-
-    if (!cartContainer || !cartContent || !receiptContainer) {
-        console.error('Contenedores no encontrados.');
-        return;
-    }
 
     // Si el carrito está vacío, mostramos una advertencia
     if (cart.length === 0) {
@@ -57,54 +49,31 @@ function renderReceipt() {
         receiptProductContainer.appendChild(productElement);
     });
 
-    // Actualizamos el total
+    // Actualizamos el total del recibo
     receiptTotal.textContent = `Total: ${total} €`;
 
-    // Obtenemos el primer elemento en el carrito para usar su ancho
-    const firstCartItem = cartContent.querySelector('.cart-product'); // Suponemos que cada producto en el carrito tiene la clase .cart-product
-    if (firstCartItem) {
-        // Establecemos el ancho del recibo para que coincida con el ancho del primer elemento del carrito
-        receiptContainer.style.width = `${firstCartItem.offsetWidth}px`;
-    }
+    // Ocultamos el contenedor del carrito y mostramos el recibo
+    productsContainer.style.display = 'none';  // Ocultamos todo el contenedor del carrito
+    receiptContainer.style.display = 'flex';  // Mostramos el recibo
 
-    // Posicionamos el recibo al centro respecto al carrito
-    cartContainer.style.position = 'relative'; // Establecemos posicionamiento relativo para el contenedor del carrito
-
-    receiptContainer.style.position = 'absolute'; // Posicionamiento absoluto para el recibo
-    receiptContainer.style.top = '0'; // Posicionamos el recibo en la parte superior
-    receiptContainer.style.left = '50%'; // Lo centramos horizontalmente
-    receiptContainer.style.transform = 'translateX(-50%)'; // Corregimos la posición para que el centro quede en su lugar
-    receiptContainer.style.zIndex = '2'; // El recibo estará encima del carrito
-    receiptContainer.style.display = 'block'; // Mostramos el recibo
-
-    // Aseguramos la visibilidad del botón "Cerrar recibo"
-    const closeReceiptButton = document.getElementById('close-receipt');
-    if (closeReceiptButton) {
-        closeReceiptButton.style.zIndex = '3'; // El botón estará encima de todos los demás elementos
-        closeReceiptButton.style.position = 'absolute'; // Posicionamiento absoluto para el botón
-        closeReceiptButton.style.top = '10px'; // Espaciado desde la parte superior
-        closeReceiptButton.style.right = '10px'; // Espaciado desde la derecha
-    }
-
-    console.log('El recibo se muestra encima del carrito.');
+    console.log('El recibo se muestra en lugar del carrito dentro del desplegable.');
 }
 
 // Función para ocultar el recibo y devolver el carrito
 function closeReceipt() {
-    const cartContainer = document.getElementById('cart-container');
+    const productsContainer = document.getElementById('products-container');
     const receiptContainer = document.getElementById('receipt-container');
 
-    if (!cartContainer || !receiptContainer) {
+    if (!productsContainer || !receiptContainer) {
         console.error('No se encontraron todos los elementos.');
         return;
     }
 
-    // Ocultamos el recibo y mostramos el carrito
-    receiptContainer.style.display = 'none'; // Ocultamos el recibo
-    cartContainer.style.zIndex = '1'; // Restauramos el carrito a su lugar
-    cartContainer.style.position = 'relative'; // Restauramos el posicionamiento relativo para el carrito
+    // Mostramos el carrito y ocultamos el recibo
+    productsContainer.style.display = 'flex';  // Mostramos el contenedor del carrito
+    receiptContainer.style.display = 'none';  // Ocultamos el recibo
 
-    console.log('El recibo está oculto, el carrito vuelve a mostrarse.');
+    console.log('El recibo está oculto, el carrito vuelve a mostrarse dentro del desplegable.');
 }
 
 // Configuramos los controladores de eventos
@@ -113,7 +82,7 @@ function setupReceiptListeners() {
         const proceedPayButton = document.getElementById('proceedPay-button');
         const closeReceiptButton = document.getElementById('close-receipt');
 
-        // Al hacer clic en "Proceder al pago", mostramos el recibo
+        // Al hacer clic en "Proceder al pago", mostramos el recibo dentro del carrito
         if (proceedPayButton) {
             proceedPayButton.addEventListener('click', renderReceipt);
         } else {
@@ -128,6 +97,50 @@ function setupReceiptListeners() {
         }
     });
 }
+
+// Agregar el evento para el botón "Pagar"
+const payButton = document.getElementById('pay-button');
+if (payButton) {
+    payButton.addEventListener('click', () => {
+        // Primero, ocultamos el recibo y cualquier otro elemento relacionado
+        const receiptContainer = document.getElementById('receipt-container');
+        if (receiptContainer) {
+            receiptContainer.style.display = 'none'; // Ocultamos el recibo cuando se hace el pago
+        }
+
+        // Ahora, mostramos el mensaje de confirmación como un modal
+        const modal = document.createElement('div');
+        modal.classList.add('confirmation-modal');
+        
+        // Contenido del mensaje
+        modal.innerHTML = `
+            <div class="confirmation-modal-content">
+                <h3>¡Gracias por tu compra!</h3>
+                <p>Tu pago ha sido procesado exitosamente. ¡Esperamos verte pronto!</p>
+                <button id="close-modal" class="close-modal-btn">Cerrar</button>
+            </div>
+        `;
+
+        // Agregamos el modal al body o al contenedor principal
+        const body = document.querySelector('body');
+        if (body) {
+            body.appendChild(modal);
+        }
+
+        // Agregar el evento para cerrar el modal
+        const closeModalButton = document.getElementById('close-modal');
+        if (closeModalButton) {
+            closeModalButton.addEventListener('click', () => {
+                modal.style.display = 'none'; // Ocultamos el modal
+                // Volver a mostrar el recibo o permitir que el usuario interactúe con la página nuevamente
+                receiptContainer.style.display = 'block';
+            });
+        }
+    });
+}
+
+
+
 
 // Inicialización
 setupReceiptListeners();
