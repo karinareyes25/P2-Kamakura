@@ -16,11 +16,6 @@ function loadFilters() {
         filterButton.textContent = filter; // El texto del botón será el nombre de la categoría
         filterButton.setAttribute('data-category', filter); // Agregar atributo para identificar la categoría
 
-        // Agregar evento click para filtrar los productos
-        filterButton.addEventListener('click', () => {
-            loadFilteredProducts(filter); // Llamar a la función que filtra y renderiza productos
-        });
-
         // Agregar el botón al contenedor
         filtersContainer.appendChild(filterButton);
     });
