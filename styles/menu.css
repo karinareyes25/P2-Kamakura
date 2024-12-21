@@ -140,6 +140,7 @@ nav {
 }
 
 /* Estilo para el modal */
+/* Estilo para el modal */
 .confirmation-modal {
     position: fixed;
     top: 0;
@@ -157,25 +158,25 @@ nav {
 .confirmation-modal-content {
     background-color: white;
     padding: 30px;
-    border-radius: 8px;
+  
     text-align: center;
-    max-width: 500px;
+    max-width: 420px;
     width: 90%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
 }
 
-/* Estilo para el botón de cerrar */
-.close-modal-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-top: 20px;
+/* Estilo para la imagen de logo dentro del modal */
+.modal-logo {
+    width: 100px; /* Ajusta el tamaño del logo */
+    height: auto;
+    margin: 20px 0; /* Espaciado superior e inferior */
 }
 
-.close-modal-btn:hover {
-    background-color: #218838;
+.confirmation-modal-content h3 {
+    margin-bottom: 20px; /* Espacio entre el h3 y el p */
+}
+
+.confirmation-modal-content p {
+    margin-top: 10px; /* Puedes ajustar este valor según tus necesidades */
 }

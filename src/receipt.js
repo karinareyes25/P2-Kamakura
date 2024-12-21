@@ -107,37 +107,42 @@ if (payButton) {
         if (receiptContainer) {
             receiptContainer.style.display = 'none'; // Ocultamos el recibo cuando se hace el pago
         }
-
         // Ahora, mostramos el mensaje de confirmación como un modal
-        const modal = document.createElement('div');
-        modal.classList.add('confirmation-modal');
-        
-        // Contenido del mensaje
-        modal.innerHTML = `
-            <div class="confirmation-modal-content">
-                <h3>¡Gracias por tu compra!</h3>
-                <p>Tu pago ha sido procesado exitosamente. ¡Esperamos verte pronto!</p>
-                <button id="close-modal" class="close-modal-btn">Cerrar</button>
-            </div>
-        `;
+const modal = document.createElement('div');
+modal.classList.add('confirmation-modal');
 
-        // Agregamos el modal al body o al contenedor principal
-        const body = document.querySelector('body');
-        if (body) {
-            body.appendChild(modal);
-        }
+// Contenido del mensaje
+modal.innerHTML = `
+    <div class="confirmation-modal-content">
+        <h3>Gracias por tu compra</h3>
+        <p>¡Pedido realizado con éxito, gracias por comprar en Kamakura Food!</p>
+        <img src="./assets/img/logo.svg" alt="Logo" class="modal-logo"> <!-- Aquí agregas la imagen -->
+        <button class="close-button" id="close-modal"><img src="./assets/img/close.svg" alt="close"></button> <!-- Cambié el id a "close-modal" para mayor claridad -->
+    </div>
+`;
 
-        // Agregar el evento para cerrar el modal
-        const closeModalButton = document.getElementById('close-modal');
-        if (closeModalButton) {
-            closeModalButton.addEventListener('click', () => {
-                modal.style.display = 'none'; // Ocultamos el modal
-                // Volver a mostrar el recibo o permitir que el usuario interactúe con la página nuevamente
-                receiptContainer.style.display = 'block';
-            });
-        }
+// Agregamos el modal al body o al contenedor principal
+const body = document.querySelector('body');
+if (body) {
+    body.appendChild(modal);
+}
+
+// Agregar el evento para cerrar el modal
+const closeModalButton = document.getElementById('close-modal');
+if (closeModalButton) {
+    closeModalButton.addEventListener('click', () => {
+        // Ocultamos el modal
+        modal.style.display = 'none';
+        // Recargamos la página
+        location.reload();
     });
 }
+
+
+        
+    });
+}
+
 
 
 
